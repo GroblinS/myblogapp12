@@ -18,8 +18,10 @@ public class TestClass8 {
 //            System.out.println(e.getCity());
 //            System.out.println(e.getAge());
 //        }
-        List<Integer> numbers = Arrays.asList(10,12,13,21,11,4);
+
+        List<Integer> numbers = Arrays.asList(10,12,13,8,21,11,4);
         List<Integer> collect = numbers.stream().filter(n1 -> n1 % 2 == 0).map(n2 -> n2 * n2).collect(Collectors.toList());
         System.out.println(collect);
+
     }
 }
