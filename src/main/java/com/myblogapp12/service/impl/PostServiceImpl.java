@@ -5,6 +5,7 @@ import com.myblogapp12.exception.ResourceNotFoundException;
 import com.myblogapp12.payload.PostDto;
 import com.myblogapp12.repository.PostRepository;
 import com.myblogapp12.service.PostService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,11 +18,13 @@ import java.util.stream.Collectors;
 
 @Service
 public class PostServiceImpl implements PostService {
-    private final PostRepository postRepository;
-
+    private PostRepository postRepository;
+    private ModelMapper modelMapper;
     @Autowired
-    public PostServiceImpl(PostRepository postRepository) {
+    public PostServiceImpl(PostRepository postRepository, ModelMapper modelMapper)
+    {
         this.postRepository = postRepository;
+        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -50,20 +53,13 @@ public class PostServiceImpl implements PostService {
         return dtos;
     }
 
-    private PostDto mapToDto(Post post) {
-        PostDto dto = new PostDto();
-        dto.setId(post.getId());
-        dto.setTitle(post.getTitle());
-        dto.setDescription(post.getDescription());
-        dto.setContent(post.getContent());
+     PostDto mapToDto(Post post) {
+       PostDto dto = modelMapper.map(post,PostDto.class);
         return dto;
     }
 
-    private Post mapToEntity(PostDto postDto) {
-        Post post = new Post();
-        post.setTitle(postDto.getTitle());
-        post.setDescription(postDto.getDescription());
-        post.setContent(postDto.getContent());
+     Post mapToEntity(PostDto postDto) {
+        Post post = modelMapper.map(postDto, Post.class);
         return post;
     }
 }

@@ -1,6 +1,7 @@
 package com.myblogapp12.service;
 
 import com.myblogapp12.payload.PostDto;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 

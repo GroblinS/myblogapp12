@@ -1,6 +1,4 @@
 package com.myblogapp12.service.impl;
-
-
 import com.myblogapp12.entity.Comment;
 import com.myblogapp12.entity.Post;
 import com.myblogapp12.exception.ResourceNotFoundException;
@@ -8,7 +6,8 @@ import com.myblogapp12.payload.CommentDto;
 import com.myblogapp12.repository.CommentRepository;
 import com.myblogapp12.repository.PostRepository;
 import com.myblogapp12.service.CommentService;
-
+import org.springframework.stereotype.Service;
+@Service
 public class CommentServiceImpl implements CommentService {
 
     private PostRepository postRepository;
@@ -36,5 +35,21 @@ public class CommentServiceImpl implements CommentService {
         dto.setEmail(savedComment.getEmail());
         dto.setText(savedComment.getText());
         return dto;
+    }
+
+    @Override
+    public void deleteComment(long id) {
+        commentRepository.deleteById(id);
+    }
+
+    @Override
+    public CommentDto updateComment(long id, CommentDto commentDto) {
+        commentRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Comment not found for id:" + id)
+        );
+        Comment comment = commentRepository.findById(id).orElseThrow(
+                ()-> new ResourceNotFoundException("Comment not found for id"+ id)
+        );
+        return commentDto;
     }
 }
