@@ -2,6 +2,7 @@ package com.myblogapp12.controller;
 
 import com.myblogapp12.payload.CommentDto;
 import com.myblogapp12.service.CommentService;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,11 +31,11 @@ public class CommentController {
         commentService.deleteComment(id);
         return new ResponseEntity<>("Comments is being deleted",HttpStatus.OK);
     }
-    //http://localhost:8080/api/comments/1
-    @PutMapping("/{id}")
+    //http://localhost:8080/api/comments/2
+    @PutMapping("/{id}/post/{postId}")
     public ResponseEntity<CommentDto> updateComment(
-            @PathVariable long id,@RequestBody CommentDto commentDto){
-        CommentDto dto = commentService.updateComment(id,commentDto);
+            @PathVariable long id,@RequestBody CommentDto commentDto,@PathVariable long postId){
+        CommentDto dto = commentService.updateComment(id,commentDto,postId);
         return new ResponseEntity<>(dto,HttpStatus.OK);
     }
 }
