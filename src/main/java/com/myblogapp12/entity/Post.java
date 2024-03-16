@@ -1,7 +1,7 @@
 package com.myblogapp12.entity;
 
-import jakarta.annotation.sql.DataSourceDefinitions;
-import jakarta.persistence.*;
+import javax.annotation.sql.DataSourceDefinitions;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
