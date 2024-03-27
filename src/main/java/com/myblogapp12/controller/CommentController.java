@@ -29,7 +29,7 @@ public class CommentController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteComment(@PathVariable long id){
         commentService.deleteComment(id);
-        return new ResponseEntity<>("Comments is being deleted",HttpStatus.OK);
+        return new ResponseEntity<>("Comments is deleted",HttpStatus.OK);
     }
     //http://localhost:8080/api/comments/2
     @PutMapping("/{id}/post/{postId}")
